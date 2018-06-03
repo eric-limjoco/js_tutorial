@@ -1,9 +1,24 @@
 let Phrase = require("eric-palindrome");
-let string = prompt("Please enter a string for palindrome testing: ")
-let phrase = new Phrase(string);
 
-if(phrase.palindrome()){
-  alert(`"${phrase.content}" is a palindrome!`)
-} else {
-  alert(`"${phrase.content}" is not a palindrome`)
+function palindromeTester(event) {
+  event.preventDefault();
+  let phrase = new Phrase(event.target.phrase.value);
+
+  let palindromeResult = document.querySelector("#palindromeResult");
+  let res = "";
+
+  if(phrase.palindrome()){
+    res = `"<strong>${phrase.content}</strong>" is a palindrome!`;
+  } else {
+    res = `"<strong>${phrase.content}</strong>" is not a palindrome`;
+  }
+  palindromeResult.innerHTML = res;
 }
+
+
+document.addEventListener("DOMContentLoaded", function(){
+  let tester = document.querySelector("#palindromeTester");
+  tester.addEventListener('submit', function(){
+    palindromeTester(event);
+  });
+});
